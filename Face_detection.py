@@ -1,0 +1,2 @@
+def detectFace(image):
+    
