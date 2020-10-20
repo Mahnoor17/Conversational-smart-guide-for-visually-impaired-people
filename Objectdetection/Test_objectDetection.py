@@ -286,4 +286,4 @@ def detectObjectFromImage(image_path):
 	print("[INFO] cleaning up...")
 
 
-objectDetection('input/dining_table.jpg')
+objectDetection(0)
