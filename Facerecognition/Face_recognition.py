@@ -1,6 +1,5 @@
 import face_recognition as fr
 import numpy as np
-from time import sleep
 import os
 import cv2
 
@@ -11,7 +10,7 @@ def registerFace():
     cam = cv2.VideoCapture(0)
     cam.set(3, 640) # set video width
     cam.set(4, 480) # set video height
-    face_detector = cv2.CascadeClassifier('config/haarcascade_frontalface_default.xml')
+    face_detector = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
     # Initialize individual sampling face count
     count = 0
     while(True):
@@ -30,25 +29,25 @@ def registerFace():
         elif count >= 1: # Take 30 face sample and stop video
             break
         cam.release()
-        cv2.destroyAllWindows()
+        #cv2.destroyAllWindows()
         
 #result=registerFace()
 
 def get_encoded_faces():
     encoded={}
-    for dirpath, dnames, fnames in os.walk('./Facerecognition/faces'):
+    for dirpath, dnames, fnames in os.walk('./faces'):
         for f in fnames:
             if f.endswith(".jpg") or f.endswith(".png"):
-                face =  fr.load_image_file("Facerecognition/faces/"+f)
+                face =  fr.load_image_file("faces/"+f)
                 encoding = fr.face_encodings(face)[0]
                 encoded[f.split(".")[0]] = encoding
     return encoded
 
 
 def unknown_image_encoded(img):
-    face =  fr.load_image_file("Facerecognition/faces/"+f)
+    face =  fr.load_image_file("faces/")
     encoding = fr.face_encodings(face)[0]
-    return encodings
+    return encoding
 
 #def recognizeFace(image,rectangle):
 def recognizeFace(image):
@@ -65,7 +64,6 @@ def recognizeFace(image):
     for face_encoding in unknown_fac_encodings:
         matches = fr.compare_faces(face_encoded, face_encoding)
         name="Unknown"
-
         face_distances = fr.face_distance(face_encoded, face_encoding)
         best_match_index = np.argmin(face_distances)
         if matches[best_match_index]:
@@ -81,8 +79,12 @@ def recognizeFace(image):
             #cv2.putText(im,str(nbr_predicted)+"--"+str(conf), (x,y+h),font, 1.1, (0,255,0)) #Draw the text
 
     #while True:
-        #cv2.imshow('Video',img)
+        #cv2.imshow('Video',image)
         #if cv2.waitKey(1) & 0xFF == ord('q'):
-    return image
+          #break
+        
+    #cv2.destroyAllWindows()
+    return (image,name)
 
-#print(recognizeFace('test.jpg'))
+#image=cv2.imread("test.jpg")
+#recognizeFace(image)

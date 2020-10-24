@@ -1,5 +1,3 @@
-import numpy as np
-from pylab import *
 import cv2
 def detectFace(image):
     face_cascade = cv2.CascadeClassifier('config/haarcascade_frontalface_default.xml')
