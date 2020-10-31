@@ -19,6 +19,11 @@ from keras.utils.data_utils import get_file
 from keras.utils import layer_utils
 from keras.preprocessing import image
 from keras_applications.imagenet_utils import _obtain_input_shape
+import urllib
+import numpy as np
+from PIL import Image
+import cv2
+from cv2 import resize   
 
 WEIGHTS_PATH = 'https://github.com/GKalliatakis/Keras-VGG16-places365/releases/download/v1.0/vgg16-places365_weights_tf_dim_ordering_tf_kernels.h5'
 WEIGHTS_PATH_NO_TOP = 'https://github.com/GKalliatakis/Keras-VGG16-places365/releases/download/v1.0/vgg16-places365_weights_tf_dim_ordering_tf_kernels_notop.h5'
@@ -227,3 +232,38 @@ def VGG16_Places365(include_top=True, weights='places',
         model.load_weights(weights)
 
     return model
+
+
+def load_model():
+    model = VGG16_Places365(weights='places')
+    # load the class label
+    file_name = 'config/categories_places365.txt'
+    if not os.access(file_name, os.W_OK):
+        synset_url = 'https://raw.githubusercontent.com/csailvision/places365/master/categories_places365.txt'
+        os.system('wget ' + synset_url)
+    classes = list()
+
+    with open(file_name) as class_file:
+        for line in class_file:
+            classes.append(line.strip().split(' ')[0][3:])
+    classes = tuple(classes)
+    
+    return (model,classes)
+
+
+def recognizeScene(image):
+    model, classes = load_model()
+    predictions=[]
+    image = resize(image, (224, 224))
+    image = np.expand_dims(image, 0)
+    predictions_to_return = 5
+    preds = model.predict(image)[0]
+    top_preds = np.argsort(preds)[::-1][0:predictions_to_return]
+    # output the prediction
+    for i in range(0, 5):
+        predictions.append(classes[top_preds[i]])
+    font = cv2.FONT_HERSHEY_PLAIN
+    im=image.reshape(image.shape[1],image.shape[2],image.shape[3])
+    cv2.putText(im, predictions[0], (25, 25), font, 1.0, (255,255,255),1)
+    return (im,predictions)
+
