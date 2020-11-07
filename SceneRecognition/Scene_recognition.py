@@ -20,7 +20,6 @@ from keras.utils import layer_utils
 from keras.preprocessing import image
 from keras_applications.imagenet_utils import _obtain_input_shape
 import urllib
-import numpy as np
 from PIL import Image
 import cv2
 from cv2 import resize   

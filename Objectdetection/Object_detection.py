@@ -1,10 +1,6 @@
 import numpy as np
 import argparse
-import imutils
-import time
 import cv2
-import os
-import mimetypes
 
 def detectObject(image):
 	# construct the argument parse and parse the arguments
@@ -46,10 +42,8 @@ def detectObject(image):
 	blob = cv2.dnn.blobFromImage(image, 1 / 255.0, (416, 416),
 		swapRB=True, crop=False)
 	net.setInput(blob)
-	start = time.time()
 	layerOutputs = net.forward(ln)
 	# [,frame,no of detections,[classid,class score,conf,x,y,h,w]
-	end = time.time()
 
 	# show timing information on YOLO
 	#print("[INFO] YOLO took {:.6f} seconds".format(end - start))

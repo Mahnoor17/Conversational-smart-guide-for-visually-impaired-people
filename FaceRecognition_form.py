@@ -18,15 +18,10 @@ class App:
         self.label2.place(x=190, y=130)
         self.name = self.show_value()
         self.vid = MyVideoCapture(self.video_source)
- 
         self.canvas = tkinter.Canvas(window, width = 600, height = 350)
         self.canvas.pack(padx=90, pady=90)
-
-        
         self.btn_captureImage=tkinter.Button(window, text="Capture Image", width=30, height=2, command=self.snapshot)
         self.btn_captureImage.pack(anchor=tkinter.CENTER, expand=True)
-
- 
         #After it is called once, the update method will be automatically called every delay milliseconds
         self.delay = 20
         self.update()
