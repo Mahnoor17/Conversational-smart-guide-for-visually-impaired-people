@@ -1,0 +1,3 @@
+pip install tensorflow_hub
+pip install bert-for-tf2
+pip install tensorflow==2.3.1
