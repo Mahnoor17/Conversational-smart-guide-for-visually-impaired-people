@@ -2,6 +2,7 @@ from Facedetection import Face_detection as fd
 from Facerecognition import Face_recognition as fr
 from Objectdetection import Object_detection as od
 from SceneRecognition import Scene_recognition as sr
+from FacialExpressionRecognition import facial_expression as fe
 from IntentIdentification import Intent_identifiction as ii
 import time
 
@@ -10,6 +11,8 @@ def annotate(image):
     #image,name = fr.recognizeFace(image)
     #image = od.detectObject(image)
     #image,predictions = sr.recognizeScene(image)
+    image = fe.facialExpression(image)
+    
     return image
 
 def textual_data(text):
