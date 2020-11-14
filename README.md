@@ -25,8 +25,11 @@
 #### Activity Recognition 
 * Download the resnet-34_kinetics.onnx file from [here](https://drive.google.com/file/d/1bd9tsxiZgakUaSDaeiRgZD1hSwBCxWez/view?usp=sharing)
 * Place the file in Conversational-smart-guide-for-visually-impaired-people/config/ to run the entire app
-* To run only Intent Identification module, place the file in  Conversational-smart-guide-for-visually-impaired-people/ActivityRecognition/
-
+* To run only Activity Recognition module, place the file in  Conversational-smart-guide-for-visually-impaired-people/ActivityRecognition/
+#### Facial Expression Recognition 
+* Download the expression.model file from [here](https://drive.google.com/file/d/1bd9tsxiZgakUaSDaeiRgZD1hSwBCxWez/view?usp=sharing)
+* Place the file in Conversational-smart-guide-for-visually-impaired-people/config/ to run the entire app
+* To run only Facial Expression module, place the file in  Conversational-smart-guide-for-visually-impaired-people/FacialExpressionRecognition/
 
 
 
