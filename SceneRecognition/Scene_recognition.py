@@ -4,9 +4,8 @@ import os
 from keras import backend as K
 import warnings
 import numpy as np
-import tensorflow as tf
 from tensorflow.keras.layers import Input
-from tensorflow.keras.layers import Activation, Dense, Flatten
+from tensorflow.keras.layers import Dense, Flatten
 from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Conv2D
@@ -17,10 +16,7 @@ from tensorflow.keras.layers import GlobalMaxPooling2D
 from keras.engine.topology import get_source_inputs
 from keras.utils.data_utils import get_file
 from keras.utils import layer_utils
-from keras.preprocessing import image
 from keras_applications.imagenet_utils import _obtain_input_shape
-import urllib
-from PIL import Image
 import cv2
 from cv2 import resize   
 
@@ -263,6 +259,10 @@ def recognizeScene(image):
         predictions.append(classes[top_preds[i]])
     font = cv2.FONT_HERSHEY_PLAIN
     im=image.reshape(image.shape[1],image.shape[2],image.shape[3])
-    cv2.putText(im, predictions[0], (25, 25), font, 1.0, (255,255,255),1)
+    cv2.putText(im, predictions[1], (25, 25), font, 1.0, (255,255,255),1)
     return (im,predictions)
 
+#image=cv2.imread('scene1.jpg')
+#image,predictions = recognizeScene(image)
+#print(image)
+#print(predictions)

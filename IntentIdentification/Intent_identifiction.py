@@ -241,7 +241,7 @@ train_labels = y
 print("Loading data....")
 load_data_obj = LoadingData()
 print("Loading model....")
-model_obj = tf.keras.models.load_model('bert.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+model_obj = tf.keras.models.load_model('config/bert.h5',custom_objects={'KerasLayer':hub.KerasLayer})
 bert_model_obj = BertModel()
 
 

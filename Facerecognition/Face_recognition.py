@@ -21,7 +21,7 @@ def registerFace():
             cv2.rectangle(img, (x,y), (x+w,y+h), (255,0,0), 2)     
             count += 1
         # Save the captured image into the datasets folder
-            cv2.imwrite("Facerecognition/faces/" + str(face_id) + ".jpg", gray[y:y+h,x:x+w])
+            cv2.imwrite("config/faces/" + str(face_id) + ".jpg", gray[y:y+h,x:x+w])
             cv2.imshow('image', img)
         k = cv2.waitKey(100) & 0xff # Press 'ESC' for exiting video
         if k == 27:
@@ -35,17 +35,17 @@ def registerFace():
 
 def get_encoded_faces():
     encoded={}
-    for dirpath, dnames, fnames in os.walk('./Facerecognition/faces'):
+    for dirpath, dnames, fnames in os.walk('config/faces'):
         for f in fnames:
             if f.endswith(".jpg") or f.endswith(".png"):
-                face =  fr.load_image_file("Facerecognition/faces/"+f)
+                face =  fr.load_image_file("config/faces/"+f)
                 encoding = fr.face_encodings(face)[0]
                 encoded[f.split(".")[0]] = encoding
     return encoded
 
 
 def unknown_image_encoded(img):
-    face =  fr.load_image_file("Facerecognition/faces/")
+    face =  fr.load_image_file("config/faces/")
     encoding = fr.face_encodings(face)[0]
     return encoding
 
@@ -54,7 +54,7 @@ def recognizeFace(image):
     faces = get_encoded_faces()
     face_encoded = list (faces.values())
     known_face_names = list (faces.keys())
-    #img= cv2.imread(image,1)
+    #image= cv2.imread(image,1)
     face_locations=fr.face_locations(image)
     unknown_fac_encodings=fr.face_encodings(image,face_locations)
     face_names=[]
@@ -74,5 +74,6 @@ def recognizeFace(image):
             #cv2.putText(im,str(nbr_predicted)+"--"+str(conf), (x,y+h),font, 1.1, (0,255,0)) #Draw the text
     return (image,face_names)
 
-#image=cv2.imread("test.jpg")
-#recognizeFace(image)
+#image=cv2.imread("test/Unknown.jpg")
+#image,face_names=recognizeFace(image)
+#print(image)

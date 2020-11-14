@@ -14,4 +14,3 @@ def detectFace(image):
     #cv2.destroyAllWindows()
     return image
 #output=detectFace('images/test.jpg')
-    

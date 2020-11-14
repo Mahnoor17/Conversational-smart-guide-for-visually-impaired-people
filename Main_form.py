@@ -1,8 +1,8 @@
 import tkinter
 import cv2
 import PIL.Image, PIL.ImageTk
-import time
-import numpy as np
+import Integrated 
+
 
 class App:
     def __init__(self, window, window_title, video_source=0):
@@ -37,37 +37,36 @@ class App:
         action_btnStop=tkinter.Button(window, text="Stop Video", width=20, height=1,  command=self.stop_video, font=("Helvetica", 11))
         action_btnStop.place(x=290, y=150)
         self.window.mainloop()
+        
     def start_video(self):
         self.vid = MyVideoCapture(self.video_source)
         self.canvas = tkinter.Canvas(width = 600, height = 350)
         self.canvas.pack(padx=20, pady=200)
         self.delay = 20
         self.update()
-    def stop_video(self):
-        #elf.vid.release()
         
-        def start_stop():
-            if btn_text=="Start":
-                action_btnStart.configure(text = "Stop") 
+    def stop_video(self):
+        self.vid.__del__()
+        
+    #def start_stop():
+     #   if btn_text=="Start":
+     #        action_btnStart.configure(text = "Stop") 
             #btn_text.set("Stop")
-            else:
-                action_btnStart.configure(text = "Start")
+     #  else:
+     #      action_btnStart.configure(text = "Start")
     
             
  
     def update(self):
          # Get a frame from the video source
         ret, frame = self.vid.get_frame()
- 
         if ret:
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
             self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
- 
         self.window.after(self.delay, self.update)
  
  
 class MyVideoCapture:
-
     def __init__(self, video_source=0):
         self.vid = cv2.VideoCapture(video_source)
         if not self.vid.isOpened():
@@ -78,7 +77,7 @@ class MyVideoCapture:
             ret, frame = self.vid.read()
             if ret:
                  # Return a boolean success flag and the current frame converted to BGR
-                 
+                frame=Integrated.annotate(frame)
                 return (ret, cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
             else:
                 return (ret, None)
@@ -89,6 +88,9 @@ class MyVideoCapture:
     def __del__(self):
         if self.vid.isOpened():
             self.vid.release()
+             
+            
+
  
  # Create a window and pass it to the Application object
 App(tkinter.Tk(), "Conversational Application")

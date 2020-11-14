@@ -107,3 +107,5 @@ def detectObject(image):
 		
 	return image
     
+#path=cv2.imread('input/dining_table.jpg')
+#print(detectObject(path))

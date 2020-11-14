@@ -2,7 +2,7 @@ import tkinter
 import cv2
 import PIL.Image, PIL.ImageTk
 import Integrated 
-
+import time
 
 class App:
     def __init__(self, window, window_title, video_source=0,counter=0):
@@ -26,6 +26,7 @@ class App:
         self.delay = 20
         self.update()
         self.window.mainloop()
+        
     def show_value(self):
         self.textBox=tkinter.Entry(text="Name", bd=5, width=45)
         self.textBox.place(x=320, y=130)
@@ -35,12 +36,10 @@ class App:
     def snapshot(self):
          # Get a frame from the video source
         imageName= self.show_value()
-        #print(imageName)
         ret, frame = self.vid.get_frame()
         img = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         self.counter = self.counter+1
         number = str(self.counter)
-        print(number + imageName)
         if ret:
             cv2.imwrite("frame/" + number + imageName + ".jpg", img)
             
@@ -68,7 +67,10 @@ class MyVideoCapture:
             ret, frame = self.vid.read()
             if ret:
                 # Return a boolean success flag and the current frame converted to BGR
-                frame=Integrated.annotate(frame)
+                #start_time = time.time()
+                #frame=Integrated.annotate(frame)
+                #end_time = time.time()
+                #print(end_time-start_time)
                 return (ret, cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
             else:
                 return (ret, None)
