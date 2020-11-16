@@ -79,7 +79,7 @@ class App:
             self.text.unbind('<Button-1>', on_click_id)
 
         on_click_id = self.text.bind('<Button-1>', on_click)
-        btn_register=tkinter.Button(window, text="Register Face", width=20, height=1,command=Fr.regiserFace, font=("Helvetica", 11))
+        btn_register=tkinter.Button(window, text="Register Face", width=20, height=1,command=self.a, font=("Helvetica", 11))
         btn_register.place(x=270, y=650)
 
         self.window.mainloop()
@@ -129,7 +129,10 @@ class App:
             self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
  
         self.window.after(self.delay, self.update,od,st,ts,fd)
- 
+    def a(self):
+        self.window.destroy()
+        Fr.regiserFace()
+
  
 class MyVideoCapture:
 
@@ -159,5 +162,3 @@ class MyVideoCapture:
  
  # Create a window and pass it to the Application object
 App(tkinter.Tk(), "Conversational Application")
-
-
