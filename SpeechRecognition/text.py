@@ -14,7 +14,7 @@ from gtts import gTTS
 from playsound import playsound  
 def text(text_val):
     # It is a text value that we want to convert to audio  
-    text_val = input("Enter your text: ")  
+    #text_val = input("Enter your text: ")  
       
     # Here are converting in English Language  
     language = 'en'  
@@ -30,5 +30,5 @@ def text(text_val):
     obj.save("file.mp3")    
     # Play the exam.mp3 file  
     playsound("file.mp3")
-    #return text
-result=text(text)
+    return text
+#text("Hi I am Mahnoor Salahuddin, a student of bachelors in computer science")

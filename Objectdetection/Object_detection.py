@@ -1,8 +1,13 @@
 import numpy as np
 import argparse
-import cv2
+import imutils
+import time
+from cv2 import cv2
+import os
+import mimetypes
 
 def detectObject(image):
+    	
 	# construct the argument parse and parse the arguments
 	ap = argparse.ArgumentParser()
 	ap.add_argument("-c", "--confidence", type=float, default=0.5,
@@ -27,7 +32,7 @@ def detectObject(image):
 	# load our YOLO object detector trained on COCO dataset (80 classes)
 	#print("[INFO] loading YOLO from disk...")
 	net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
-
+	#cv2.VideoCapture(0)
 	# load our input image and grab its spatial dimensions
 	#image = cv2.imread(image)
 	(H, W) = image.shape[:2]
@@ -42,8 +47,10 @@ def detectObject(image):
 	blob = cv2.dnn.blobFromImage(image, 1 / 255.0, (416, 416),
 		swapRB=True, crop=False)
 	net.setInput(blob)
+	start = time.time()
 	layerOutputs = net.forward(ln)
 	# [,frame,no of detections,[classid,class score,conf,x,y,h,w]
+	end = time.time()
 
 	# show timing information on YOLO
 	#print("[INFO] YOLO took {:.6f} seconds".format(end - start))
@@ -106,6 +113,4 @@ def detectObject(image):
 				0.5, color, 2)
 		
 	return image
-    
-#path=cv2.imread('input/dining_table.jpg')
-#print(detectObject(path))
+#img=detectObject('input/dining_table.jpg')   
