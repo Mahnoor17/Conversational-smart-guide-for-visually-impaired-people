@@ -7,6 +7,8 @@ engine.stop()'''
 # Import the gTTS module for text  
 # to speech conversion  
 from gtts import gTTS  
+from datetime import datetime
+import os
   
 # This module is imported so that we can  
 # play the converted audio  
@@ -27,8 +29,10 @@ def text(text_val):
       
     #Here we are saving the transformed audio in a mp3 file named  
     # exam.mp3  
-    obj.save("file.mp3")    
+    date_string = datetime.now().strftime("%d%m%Y%H%M%S")
+    filename = "voice"+date_string+".mp3"
+    obj.save(filename)    
     # Play the exam.mp3 file  
-    playsound("file.mp3")
+    playsound(filename)   
     return text
 #text("Hi I am Mahnoor Salahuddin, a student of bachelors in computer science")

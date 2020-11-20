@@ -6,6 +6,7 @@ import numpy as np
 from functools import partial
 from threading import Thread
 from Facedetection import Face_detection as Fd
+from Facerecognition import Face_recognition as Fr
 from Objectdetection import Object_detection as Od
 from SpeechRecognition import speech_to_text as St
 from SpeechRecognition import text as Ts

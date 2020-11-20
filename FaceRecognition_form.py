@@ -1,7 +1,7 @@
 import tkinter
 import cv2
 import PIL.Image, PIL.ImageTk
-import Integrated 
+#import Integrated 
 import time
 
 class App:
@@ -41,7 +41,7 @@ class App:
         self.counter = self.counter+1
         number = str(self.counter)
         if ret:
-            cv2.imwrite("frame/" + number + imageName + ".jpg", img)
+            cv2.imwrite("config/faces/"imageName + number+ ".jpg", img)
             
  
     def update(self):
