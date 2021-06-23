@@ -8,8 +8,7 @@
 5. Intent Identification
 6. Speech to text
 7. Text to speech
-8. Summary Generation
-9. Natural Language generation
+8. Natural Language generation
 
 
 #### Object detection
